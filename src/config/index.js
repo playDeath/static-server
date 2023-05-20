@@ -1,4 +1,4 @@
-const DEFAULT_DIST = "dist"
+const DEFAULT_DIST = ""
 const PORT = 9999
 module.exports = {
     DEFAULT_DIST,
