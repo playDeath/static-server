@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+const fs = require("fs")
 const koa = require("koa")
 const static = require("koa-static")
 const { DEFAULT_DIST, PORT } = require("./config/index.js")
@@ -17,7 +18,23 @@ if (args.includes("-o")) {
     openBrowser(`http://localhost:${port}`)
 }
 const app = new koa()
-app.use(static(resolve(dist)))
+const configPath = resolve("static.config.js")
+let config = null
+if (fs.existsSync(configPath)) {
+    config = require(resolve("static.config.js"))
+}
+app.use(
+    static(resolve(dist), {
+        setHeaders: (res) => {
+            if (config && config.responseHeaders) {
+                const resKeys = Object.keys(config.responseHeaders)
+                resKeys.forEach((key) => {
+                    res.setHeader(key, config.responseHeaders[key])
+                })
+            }
+        },
+    })
+)
 app.listen(port, () => {
     console.log(`the static server is running in port ${port}`)
 })
