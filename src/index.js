@@ -14,9 +14,6 @@ for (let i = 0; i < args.length; i++) {
 }
 const port = allowInfo["-p"] || PORT
 const dist = allowInfo["-d"] || DEFAULT_DIST
-if (args.includes("-o")) {
-    openBrowser(`http://localhost:${port}`)
-}
 const app = new koa()
 const configPath = resolve("static.config.js")
 let config = null
@@ -37,4 +34,7 @@ app.use(
 )
 app.listen(port, () => {
     console.log(`the static server is running in port ${port}`)
+    if (args.includes("-o")) {
+        openBrowser(`http://localhost:${port}`)
+    }
 })
