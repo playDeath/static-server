@@ -33,8 +33,5 @@ app.use(
     })
 )
 app.listen(port, () => {
-    console.log(`the static server is running in port ${port}`)
-    if (args.includes("-o")) {
-        openBrowser(`http://localhost:${port}`)
-    }
+    console.log(`the static server is running in \x1B[1;32mhttp://localhost:${port} \x1B[0m`)
 })

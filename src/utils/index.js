@@ -12,7 +12,6 @@ const openBrowser = (url) => {
             console.error(`执行命令时出错：${error}`)
             return
         }
-        console.log(`open browser`)
     })
 }
 module.exports = {
